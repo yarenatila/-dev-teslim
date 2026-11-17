@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--
+DOSYA HARİTASI — BİR MASAL, BİN HAYAL
+Bu proje üç dosyadan oluşur. Üçü de AYNI KLASÖRDE durmalıdır:
+  1. index.html : sayfanın iskeleti (bu dosya)
+  2. style.css  : bütün CSS kuralları
+  3. script.js  : masallar dizisi ve JavaScript işlevleri
+Bu dosyanın içindeki bölümler:
+  - <head>: sayfa bilgileri ve style.css bağlantısı
+  - Gizli SVG görsel deposu: kilim bordürü, ortak motifler ve 8 özgün masal resmi
+  - #ana-sayfa: kapak, arama, kategoriler, kartlar ve en alttaki kaynakça
+  - #masal-gorunumu: aynı dosya içindeki masal okuma ekranı
+  - </body>'den hemen önce: script.js bağlantısı
+Bu sayfanın çalışması için internet veya kütüphane gerekmez; yalnızca üç dosyanın aynı klasörde olması yeterlidir.
+-->
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Sekiz Türk masalını renkli, özgün çizimlerle buluşturan dijital masal arşivi.">
+  <title>Bir Masal, Bin Hayal | Dijital Masal Arşivi</title>
+  <!-- Bütün CSS kuralları artık harici dosyada: style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ========== 1. GÖRSEL DEPOSU: SAYFADA GÖRÜNMEYEN ÖZGÜN SVG ÇİZİMLER ========== -->
+  <!-- Safari için SVG deposu display:none değildir. Her resim 400×400 koordinat alanında çizilir. -->
+  <svg class="svg-deposu" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="kilim-desen" width="80" height="34" patternUnits="userSpaceOnUse">
+        <rect width="80" height="34" fill="#E9D9BD"/>
+        <path d="M0 0 20 15 40 0 60 15 80 0" fill="none" stroke="#4B1D3F" stroke-width="2"/>
+        <path d="M0 0 20 15 40 0 20 -15Z M40 0 60 15 80 0 60 -15Z" fill="#B5573B" opacity=".87"/>
+        <path d="M20 3 29 12 20 21 11 12Z M60 3 69 12 60 21 51 12Z" fill="#4B1D3F"/>
+        <path d="m0 34 10-13 10 13 10-13 10 13 10-13 10 13 10-13 10 13" fill="none" stroke="#B5573B" stroke-width="2"/>
+        <path d="M0 27H80" stroke="#4B1D3F" stroke-width="1" opacity=".55"/>
+      </pattern>
+      <!-- Ortak motifler: renklerini kullanıldıkları yerde currentColor'dan alır. -->
+      <g id="motif-yildiz"><path d="M0-20 6-9 20-14 14 0 20 14 6 9 0 20-6 9-20 14-14 0-20-14-6-9Z" fill="none" stroke="currentColor" stroke-width="2.6"/></g>
+      <g id="motif-yildiz-dolu"><path d="M0-20 6-9 20-14 14 0 20 14 6 9 0 20-6 9-20 14-14 0-20-14-6-9Z" fill="currentColor"/></g>
+      <g id="motif-lale"><path d="M0 17Q-18 1-13-15L-5-9 0-23 5-9 13-15Q18 1 0 17Z" fill="currentColor"/><path d="M0 15V30M0 23Q-12 16-17 23M0 25Q12 14 17 21" fill="none" stroke="currentColor" stroke-width="3"/></g>
+      <g id="motif-nar"><path d="M-8-17-3-25 3-21 9-26 11-15Q26-5 18 14 13 27 0 27-13 27-18 14-26-5-8-17Z" fill="currentColor"/></g>
+      <g id="motif-yaprak"><path d="M-18 17Q-26-14 23-22 23 19-18 17Z" fill="currentColor"/><path d="M-18 17Q0-5 23-22" fill="none" stroke="currentColor" stroke-width="2"/></g>
+      <g id="motif-kalp"><path d="M0 21C-34 1-21-25-6-17Q0-15 0-10 7-26 19-15 35 1 0 21Z" fill="currentColor"/></g>
+      <g id="motif-isilti"><path d="M0-20 4-5 19 0 4 5 0 20-4 5-19 0-4-5Z" fill="currentColor"/></g>
+      <!-- Her masalın gradyan adı kendi kısaltmasıyla başlar. -->
+      <linearGradient id="ya-gok" x2="0" y2="1"><stop stop-color="#D7A0A7"/><stop offset="1" stop-color="#F4D8C7"/></linearGradient>
+      <linearGradient id="ya-tepe" x2="0" y2="1"><stop stop-color="#C79D86"/><stop offset="1" stop-color="#966D68"/></linearGradient>
+      <linearGradient id="uc-gok" x1="0" x2="1" y2="1"><stop stop-color="#101A55"/><stop offset=".58" stop-color="#48317B"/><stop offset="1" stop-color="#67436E"/></linearGradient>
+      <radialGradient id="uc-aydinlik"><stop stop-color="#EAC36A" stop-opacity=".32"/><stop offset="1" stop-color="#EAC36A" stop-opacity="0"/></radialGradient>
+      <linearGradient id="uf-gok" x2="0" y2="1"><stop stop-color="#9DDDF8"/><stop offset="1" stop-color="#E6F7FF"/></linearGradient>
+      <linearGradient id="ys-gok" x2="1" y2="1"><stop stop-color="#D6BDE9"/><stop offset="1" stop-color="#FCE7EC"/></linearGradient>
+      <linearGradient id="ku-gece" x2="1" y2="1"><stop stop-color="#0B1032"/><stop offset="1" stop-color="#3F4B84"/></linearGradient>
+      <radialGradient id="ku-isik"><stop stop-color="#F6F5DB" stop-opacity=".85"/><stop offset="1" stop-color="#F6F5DB" stop-opacity="0"/></radialGradient>
+      <radialGradient id="nr-zemin"><stop stop-color="#9E3748"/><stop offset="1" stop-color="#430A20"/></radialGradient>
+      <linearGradient id="nr-meyve" x1="0" x2="1" y2="1"><stop stop-color="#E45D55"/><stop offset="1" stop-color="#821D37"/></linearGradient>
+      <linearGradient id="vd-gok" x2="0" y2="1"><stop stop-color="#F5E9B5"/><stop offset="1" stop-color="#FCF6D9"/></linearGradient>
+      <linearGradient id="tz-zemin" x2="0" y2="1"><stop stop-color="#F3E6CB"/><stop offset="1" stop-color="#D7F0F1"/></linearGradient>
+      <!-- 1. YÜREK ANA: kalp yaprakları, yüzsüz ana ve tepeler. -->
+      <g id="resim-yurek-ana">
+        <rect width="400" height="400" fill="url(#ya-gok)"/><circle cx="205" cy="129" r="103" fill="#FDE8DA" opacity=".45"/>
+        <path d="M0 253Q90 190 198 249T400 229V400H0Z" fill="#B58A7A"/><path d="M0 301Q117 249 230 299T400 282V400H0Z" fill="url(#ya-tepe)"/>
+        <path d="M35 351Q69 231 43 104M364 349Q337 210 362 94" fill="none" stroke="#41634C" stroke-width="6" stroke-linecap="round"/>
+        <g fill="#567D58"><path d="M48 259q-50-32-32-50 28-7 32 50Z"/><path d="M51 219q40-42 51-23 3 27-51 23Z"/><path d="M346 261q53-32 38-52-32-4-38 52Z"/><path d="M349 187q-41-33-51-17-5 26 51 17Z"/></g>
+        <g color="#AC4C68"><use href="#motif-kalp" transform="translate(37 148) scale(.86)"/><use href="#motif-kalp" transform="translate(79 272) scale(.65)"/><use href="#motif-kalp" transform="translate(360 150) scale(.92)"/><use href="#motif-kalp" transform="translate(320 284) scale(.7)"/></g>
+        <path d="M123 379Q130 282 150 235H248Q274 292 280 379Z" fill="#A95169"/><path d="M153 254Q179 283 200 266Q221 283 247 253L250 369H150Z" fill="#F2D9C0"/>
+        <path d="M175 223Q151 195 154 162Q158 124 200 123Q242 124 246 162Q247 195 224 222Z" fill="#782D47"/>
+        <ellipse cx="200" cy="174" rx="39" ry="51" fill="#EAC2A6"/>
+        <path d="M158 170Q146 116 200 106Q252 117 243 171Q226 144 200 142Q174 144 158 170Z" fill="#6F2944"/>
+        <path d="M167 217Q147 232 145 263L117 308 136 323 177 277M232 216Q254 225 258 269L287 304 268 323 221 277" fill="#A95169"/>
+        <g color="#D25D7B"><use href="#motif-kalp" transform="translate(200 280) scale(1.05)"/></g>
+        <path d="M145 347H255M144 356H256M142 365H260" stroke="#9D5A4E" stroke-width="3" stroke-dasharray="7 8"/>
+        <g color="#FFF5DD"><use href="#motif-yildiz-dolu" transform="translate(70 60) scale(.38)"/><use href="#motif-yildiz-dolu" transform="translate(329 64) scale(.38)"/></g>
+      </g>
+      <!-- 2. GÖKTEN DÜŞEN ÜÇ ELMA: üç elma görselin orta bölgesinde. -->
+      <g id="resim-gokten-dusen-uc-elma">
+        <rect width="400" height="400" fill="url(#uc-gok)"/><circle cx="210" cy="181" r="161" fill="url(#uc-aydinlik)"/>
+        <g fill="none" stroke="#E8C26C" opacity=".5"><circle cx="201" cy="191" r="145" stroke-width="1.4"/><path d="M32 267Q195 51 366 265" stroke-width="2"/></g>
+        <g color="#F6D991"><use href="#motif-yildiz" transform="translate(82 82) scale(.72)"/><use href="#motif-yildiz" transform="translate(303 260) scale(.52)"/><use href="#motif-isilti" transform="translate(110 274) scale(.37)"/><use href="#motif-isilti" transform="translate(317 112) scale(.41)"/><use href="#motif-isilti" transform="translate(187 42) scale(.27)"/></g>
+        <path d="M315 42a32 32 0 1 0 32 48 37 37 0 1 1-32-48Z" fill="#F8D785"/>
+        <g fill="#FAE3AF"><circle cx="35" cy="148" r="2.3"/><circle cx="168" cy="76" r="2"/><circle cx="375" cy="174" r="2.5"/><circle cx="260" cy="54" r="2"/><circle cx="41" cy="220" r="2"/><circle cx="363" cy="314" r="2"/></g>
+        <g fill="none" stroke="#EAC167" stroke-width="2.4" stroke-linecap="round" opacity=".75"><path d="M76 210q25-23 49-17"/><path d="M160 256q28-21 46-18"/><path d="M242 199q25-18 42-15"/></g>
+        <g transform="translate(128 193)"><path d="M0-30C-40-49-47-7-29 26-16 50 16 48 29 22 48-14 30-49 0-30Z" fill="#C43F4A"/><ellipse cx="-15" cy="-8" rx="6" ry="17" fill="#EB7E6E" opacity=".7"/><path d="M0-30q-4-20 8-29" stroke="#75432C" stroke-width="5" fill="none"/><path d="M5-48q18-17 32-7-7 16-32 7Z" fill="#6EAA64"/></g>
+        <g transform="translate(217 236) scale(.93)"><path d="M0-30C-40-49-47-7-29 26-16 50 16 48 29 22 48-14 30-49 0-30Z" fill="#D85250"/><ellipse cx="-15" cy="-8" rx="6" ry="17" fill="#F4A27C" opacity=".7"/><path d="M0-30q-4-20 8-29" stroke="#75432C" stroke-width="5" fill="none"/><path d="M5-48q18-17 32-7-7 16-32 7Z" fill="#75AD65"/></g>
+        <g transform="translate(286 168) scale(.8)"><path d="M0-30C-40-49-47-7-29 26-16 50 16 48 29 22 48-14 30-49 0-30Z" fill="#B93249"/><ellipse cx="-15" cy="-8" rx="6" ry="17" fill="#E98575" opacity=".7"/><path d="M0-30q-4-20 8-29" stroke="#75432C" stroke-width="5" fill="none"/><path d="M5-48q18-17 32-7-7 16-32 7Z" fill="#75AD65"/></g>
+        <path d="M0 356Q101 300 199 358T400 336V400H0Z" fill="#11183C"/><path d="M0 382Q126 338 262 381T400 362V400H0Z" fill="#28305E"/>
+      </g>
+      <!-- 3. KIRMIZI UÇURTMA: geniş gök, kırmızı elmas uçurtma ve kuyruk. -->
+      <g id="resim-kirmizi-ucurtma">
+        <rect width="400" height="400" fill="url(#uf-gok)"/><circle cx="335" cy="74" r="41" fill="#FFF4C9" opacity=".85"/>
+        <g fill="#FFFFFF" opacity=".9"><path d="M19 117q10-25 33-10 19-31 44-8 22-4 29 19Z"/><path d="M265 135q9-21 26-11 15-24 39-4 18-1 25 15Z"/><path d="M37 303q13-24 33-9 20-30 43-8 17-3 24 17Z"/></g>
+        <g fill="none" stroke="#5CB5D8" opacity=".68" stroke-width="3" stroke-linecap="round"><path d="M21 166q44-15 92 0"/><path d="M38 186q30-11 62-3"/><path d="M292 225q43-12 77 0"/><path d="M271 244q58-15 104 1"/></g>
+        <path d="M204 94 298 195 203 283 108 193Z" fill="#D32635"/><path d="M204 94 203 283 108 193Z" fill="#E74949"/><path d="M204 94 298 195 203 193Z" fill="#BF1B2C"/><path d="M203 193 298 195 203 283Z" fill="#F06459"/>
+        <path d="M204 96V280M110 193H297" stroke="#F8E4C0" stroke-width="5"/><circle cx="203" cy="193" r="7" fill="#F7E0BD"/>
+        <path d="M202 281Q252 306 214 337T226 404M203 193Q166 267 91 372" fill="none" stroke="#6E5948" stroke-width="2.5"/>
+        <g><path d="m228 313-16-15 1 23 15 10 20-17Z" fill="#FFFFFF" stroke="#D32635" stroke-width="2"/><path d="m211 347-15-11 2 19 16 10 14-17Z" fill="#D32635"/><path d="m224 374-14-12-1 20 17 8 13-15Z" fill="#FFFFFF" stroke="#D32635" stroke-width="2"/></g>
+        <g color="#FFFFFF"><use href="#motif-isilti" transform="translate(70 61) scale(.29)"/><use href="#motif-isilti" transform="translate(350 290) scale(.31)"/></g>
+      </g>
+      <!-- 4. AYŞECİK İLE YASEMİN SULTAN: saray kemeri ve yaseminler. -->
+      <g id="resim-aysecik-ile-yasemin-sultan">
+        <rect width="400" height="400" fill="url(#ys-gok)"/>
+        <path d="M66 382V166Q66 98 200 25 334 98 334 166V382Z" fill="#EDDEEF" stroke="#C49B55" stroke-width="8"/>
+        <path d="M91 382V171Q91 115 200 60 309 115 309 171V382Z" fill="#DCCDED" stroke="#F9E8C8" stroke-width="4"/>
+        <path d="M143 294V191q9-66 57-89 48 23 57 89v103Z" fill="#B39CC8"/>
+        <path d="M114 307V181h19v126M267 307V181h19v126" fill="#E4C792"/>
+        <path d="M112 181h23l-12-25Z M265 181h23l-12-25Z" fill="#C49B55"/>
+        <path d="M165 294V216a35 35 0 0 1 70 0v78" fill="#F6E8DA"/>
+        <path d="M163 218Q201 150 237 218" fill="none" stroke="#C49B55" stroke-width="4"/><path d="M145 295H257" stroke="#C49B55" stroke-width="5"/>
+        <path d="M68 308H334V400H68Z" fill="#F5E1C8"/><path d="M68 333H334M68 359H334M68 386H334M99 308v92m60-92v92m67-92v92m59-92v92" stroke="#D7B77E" stroke-width="2"/>
+        <path d="M44 396Q39 219 73 126M356 395Q360 216 326 124" fill="none" stroke="#617A59" stroke-width="6"/>
+        <g fill="#54826A"><ellipse cx="65" cy="242" rx="28" ry="11" transform="rotate(-31 65 242)"/><ellipse cx="38" cy="293" rx="28" ry="11" transform="rotate(37 38 293)"/><ellipse cx="344" cy="243" rx="28" ry="11" transform="rotate(30 344 243)"/><ellipse cx="368" cy="300" rx="28" ry="11" transform="rotate(-38 368 300)"/></g>
+        <g fill="#FFFDF6" stroke="#F4E6CC" stroke-width="1"><g transform="translate(59 187)"><ellipse cx="0" cy="-12" rx="8" ry="14"/><ellipse cx="0" cy="12" rx="8" ry="14"/><ellipse cx="-12" cy="0" rx="14" ry="8"/><ellipse cx="12" cy="0" rx="14" ry="8"/><circle r="5" fill="#D2B05E" stroke="none"/></g><g transform="translate(345 183)"><ellipse cy="-12" rx="8" ry="14"/><ellipse cy="12" rx="8" ry="14"/><ellipse cx="-12" rx="14" ry="8"/><ellipse cx="12" rx="14" ry="8"/><circle r="5" fill="#D2B05E" stroke="none"/></g><g transform="translate(34 342) scale(.8)"><ellipse cy="-12" rx="8" ry="14"/><ellipse cy="12" rx="8" ry="14"/><ellipse cx="-12" rx="14" ry="8"/><ellipse cx="12" rx="14" ry="8"/><circle r="5" fill="#D2B05E" stroke="none"/></g><g transform="translate(363 347) scale(.8)"><ellipse cy="-12" rx="8" ry="14"/><ellipse cy="12" rx="8" ry="14"/><ellipse cx="-12" rx="14" ry="8"/><ellipse cx="12" rx="14" ry="8"/><circle r="5" fill="#D2B05E" stroke="none"/></g></g>
+      </g>
+      <!-- 5. DİPSİZ KUYU: sessiz gece, ay ve geometrik taşlı kuyu. -->
+      <g id="resim-dipsiz-kuyu">
+        <rect width="400" height="400" fill="url(#ku-gece)"/><circle cx="199" cy="78" r="103" fill="url(#ku-isik)"/><circle cx="200" cy="75" r="32" fill="#E9EADF"/>
+        <g fill="#DAE4FF"><circle cx="58" cy="57" r="2"/><circle cx="327" cy="49" r="2.2"/><circle cx="359" cy="134" r="2"/><circle cx="92" cy="136" r="1.8"/><circle cx="282" cy="118" r="2"/></g>
+        <path d="M176 112 118 290H293L223 112Z" fill="#EFF1E5" opacity=".13"/>
+        <path d="M79 283Q200 239 322 283V363Q200 413 79 363Z" fill="#737D9D"/>
+        <path d="M79 290Q110 309 136 291L160 312 193 291 223 311 258 290 291 307 322 288M79 325Q112 346 143 323L172 342 207 326 240 347 279 325 322 342" stroke="#48536F" fill="none" stroke-width="8"/>
+        <g fill="#9EA9C0"><path d="M84 293 113 301 113 328 84 319Z"/><path d="M143 303 174 310 174 335 143 323Z"/><path d="M207 307 239 307 239 338 207 327Z"/><path d="M280 302 316 294 316 329 280 324Z"/></g>
+        <ellipse cx="200" cy="282" rx="126" ry="56" fill="#C9CED6"/><ellipse cx="200" cy="282" rx="111" ry="45" fill="#7A8AA9"/><ellipse cx="200" cy="282" rx="94" ry="34" fill="#29385F"/><ellipse cx="200" cy="282" rx="70" ry="21" fill="#141C42"/>
+        <ellipse cx="200" cy="282" rx="114" ry="49" fill="none" stroke="#E9E9E6" stroke-width="4" opacity=".85"/>
+        <g fill="none" stroke="#DDE6FA" stroke-width="2.5" stroke-dasharray="8 10" opacity=".65"><ellipse cx="200" cy="203" rx="90" ry="26"/><ellipse cx="200" cy="159" rx="61" ry="18"/></g>
+        <path d="M0 365Q72 343 122 365T248 363T400 365V400H0Z" fill="#1B254A"/>
+      </g>
+      <!-- 6. SİHİRLİ NAR: diğerlerinden farklı, simetrik madalyon düzeni. -->
+      <g id="resim-sihirli-nar">
+        <rect width="400" height="400" fill="url(#nr-zemin)"/>
+        <path d="M200 18 249 77 324 55 325 126 383 200 325 274 324 345 249 323 200 382 151 323 76 345 75 274 17 200 75 126 76 55 151 77Z" fill="none" stroke="#D7AF51" stroke-width="5"/>
+        <circle cx="200" cy="200" r="139" fill="#702036" stroke="#E8C574" stroke-width="5"/><circle cx="200" cy="200" r="122" fill="none" stroke="#E8C574" stroke-width="2" stroke-dasharray="5 10"/>
+        <g color="#4F8953"><use href="#motif-yaprak" transform="translate(201 75) rotate(105) scale(.76)"/><use href="#motif-yaprak" transform="translate(290 111) rotate(145) scale(.76)"/><use href="#motif-yaprak" transform="translate(325 201) rotate(195) scale(.76)"/><use href="#motif-yaprak" transform="translate(291 286) rotate(245) scale(.76)"/><use href="#motif-yaprak" transform="translate(202 327) rotate(290) scale(.76)"/><use href="#motif-yaprak" transform="translate(111 287) rotate(330) scale(.76)"/><use href="#motif-yaprak" transform="translate(75 199) rotate(10) scale(.76)"/><use href="#motif-yaprak" transform="translate(109 111) rotate(55) scale(.76)"/></g>
+        <g fill="#D7B055"><circle cx="200" cy="69" r="5"/><circle cx="292" cy="109" r="5"/><circle cx="332" cy="200" r="5"/><circle cx="292" cy="291" r="5"/><circle cx="200" cy="333" r="5"/><circle cx="108" cy="292" r="5"/><circle cx="68" cy="200" r="5"/><circle cx="108" cy="108" r="5"/></g>
+        <path d="M173 135q-48-17-57 39-11 90 84 119 104-34 83-123-10-46-56-35Z" fill="url(#nr-meyve)" stroke="#E9A45F" stroke-width="3"/>
+        <path d="M170 132 181 111 199 127 216 110 231 135" fill="#C99848" stroke="#F5D27D" stroke-width="3"/>
+        <path d="M221 147Q287 145 272 225Q264 255 224 275Q204 226 221 147Z" fill="#F2C68A"/>
+        <g fill="#B63345" stroke="#F9A275" stroke-width="1.7"><circle cx="237" cy="165" r="9"/><circle cx="252" cy="184" r="9"/><circle cx="230" cy="190" r="9"/><circle cx="254" cy="210" r="9"/><circle cx="232" cy="217" r="9"/><circle cx="241" cy="243" r="9"/></g>
+        <path d="M144 158q-25 41-6 81" fill="none" stroke="#F28B7B" stroke-width="9" stroke-linecap="round" opacity=".65"/>
+        <g color="#E6C26D"><use href="#motif-isilti" transform="translate(46 46) scale(.55)"/><use href="#motif-isilti" transform="translate(354 46) scale(.55)"/><use href="#motif-isilti" transform="translate(46 352) scale(.55)"/><use href="#motif-isilti" transform="translate(354 352) scale(.55)"/></g>
+        <path d="M4 0Q40 75 65 84M396 0Q360 75 335 84M4 400Q43 328 70 316M396 400Q357 328 330 316" fill="none" stroke="#47734D" stroke-width="7"/>
+      </g>
+      <!-- 7. VADİDEKİ NİNE: katmanlı yeşil vadi ve masal kitabı sadeliği. -->
+      <g id="resim-vadideki-nine">
+        <rect width="400" height="400" fill="url(#vd-gok)"/><circle cx="318" cy="80" r="43" fill="#EFC86F"/>
+        <path d="M0 223Q70 124 163 208T400 179V400H0Z" fill="#B7C99A"/><path d="M0 270Q139 187 243 257T400 220V400H0Z" fill="#8EA982"/>
+        <path d="M0 311Q96 258 179 304T400 274V400H0Z" fill="#6F906B"/><path d="M0 357Q146 299 250 356T400 317V400H0Z" fill="#507B5B"/>
+        <path d="M184 400Q115 357 168 328 237 303 188 275 161 261 171 250" fill="none" stroke="#E3C892" stroke-width="18" stroke-linecap="round"/>
+        <g transform="translate(85 227)"><rect x="-24" y="-2" width="50" height="42" fill="#EED6A3"/><path d="M-32-2 2-26 34-2Z" fill="#A76A55"/><rect x="-3" y="17" width="13" height="23" fill="#7C6D5D"/><rect x="-17" y="8" width="10" height="11" fill="#B5D1C4"/><path d="M18-22v-15" stroke="#8E7969" stroke-width="5"/><path d="M22-37q-12-8-5-15t-1-15" fill="none" stroke="#F7E6D5" stroke-width="5" opacity=".75"/></g>
+        <g fill="#416C4B"><path d="M31 273 14 306H49Z M32 245 9 285H55Z M33 224 14 261H51Z"/><rect x="28" y="286" width="8" height="30" fill="#785B41"/><path d="M349 228 321 293H376Z M349 258 315 315H385Z"/><rect x="344" y="296" width="10" height="40" fill="#785B41"/></g>
+        <g fill="#608C58"><circle cx="286" cy="267" r="27"/><circle cx="312" cy="256" r="29"/><circle cx="329" cy="279" r="25"/></g><rect x="306" y="281" width="10" height="37" fill="#806249"/>
+        <g fill="#F2D589"><circle cx="41" cy="350" r="5"/><circle cx="88" cy="366" r="5"/><circle cx="274" cy="372" r="5"/><circle cx="361" cy="352" r="5"/></g>
+        <g fill="#FCF4E4"><circle cx="45" cy="350" r="2"/><circle cx="92" cy="366" r="2"/><circle cx="278" cy="372" r="2"/><circle cx="365" cy="352" r="2"/></g>
+      </g>
+      <!-- 8. KIYMETLİ TUZ: üç boyut hissi veren tuz kristalleri ve dalgalar. -->
+      <g id="resim-kiymetli-tuz">
+        <rect width="400" height="400" fill="url(#tz-zemin)"/>
+        <g stroke="#D2C7A9" stroke-width="1" opacity=".45" fill="none"><path d="M0 45 400 245M0 95 400 295M0 145 400 345M0 195 400 395M400 45 0 245M400 95 0 295M400 145 0 345M400 195 0 395"/></g>
+        <path d="M177 40 123 208M223 40 276 208M200 24V203" stroke="#FFFFFF" stroke-width="12" opacity=".45"/>
+        <g transform="translate(90 144)"><path d="m0 34 47-27 47 27-47 27Z" fill="#FFFFFF" stroke="#87C4D0" stroke-width="2"/><path d="m0 34 47 27v62L0 95Z" fill="#ABDDE2"/><path d="m94 34-47 27v62l47-28Z" fill="#5CAAB8"/></g>
+        <g transform="translate(193 104)"><path d="m0 44 54-31 54 31-54 31Z" fill="#FFFFFF" stroke="#91C9D2" stroke-width="2"/><path d="m0 44 54 31v82L0 126Z" fill="#C4E9E9"/><path d="m108 44-54 31v82l54-31Z" fill="#7EC0CA"/></g>
+        <g transform="translate(151 230) scale(.76)"><path d="m0 34 47-27 47 27-47 27Z" fill="#FFFFFF" stroke="#87C4D0" stroke-width="2"/><path d="m0 34 47 27v62L0 95Z" fill="#ABDDE2"/><path d="m94 34-47 27v62l47-28Z" fill="#5CAAB8"/></g>
+        <path d="M0 318Q83 283 158 319T400 312V400H0Z" fill="#AFDFDF"/><path d="M0 347Q101 316 194 352T400 340V400H0Z" fill="#69C6CD"/><path d="M0 371Q117 339 220 377T400 365V400H0Z" fill="#278E9B"/>
+        <g fill="#FFFFFF"><circle cx="47" cy="347" r="3"/><circle cx="101" cy="376" r="4"/><circle cx="302" cy="355" r="3"/><circle cx="356" cy="382" r="3"/></g>
+        <g color="#FFFFFF"><use href="#motif-isilti" transform="translate(59 112) scale(.58)"/><use href="#motif-isilti" transform="translate(334 154) scale(.65)"/><use href="#motif-isilti" transform="translate(312 77) scale(.37)"/></g>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ========== 2. ANA SAYFA: MASAL KAPISI, ARAMA VE KARTLAR ========== -->
+  <main id="ana-sayfa" class="ana-sayfa">
+    <svg class="kilim-serit" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true"><rect width="1200" height="34" fill="url(#kilim-desen)"/></svg>
+    <header class="kapak">
+      <svg class="kapak-amblem" viewBox="0 0 140 165" aria-hidden="true">
+        <path d="M15 154V67Q15 29 70 8 125 29 125 67V154Z" fill="#4B1D3F"/>
+        <path d="M24 152V70Q24 36 70 18 116 36 116 70V152Z" fill="#D5B07A"/>
+        <path d="M33 151V72Q33 43 70 28 107 43 107 72V151Z" fill="#FFF5DD"/>
+        <path d="M44 148V77Q44 55 70 43 96 55 96 77V148Z" fill="#4B1D3F"/>
+        <g color="#D5B07A"><use href="#motif-yildiz-dolu" transform="translate(70 94) scale(1.07)"/></g>
+        <circle cx="70" cy="94" r="9" fill="#4B1D3F"/>
+        <g color="#B5573B"><use href="#motif-lale" transform="translate(16 107) scale(.7)"/><use href="#motif-lale" transform="translate(124 107) scale(.7)"/></g>
+        <path d="M6 156H134" stroke="#4B1D3F" stroke-width="4"/>
+      </svg>
+      <div class="kapak-kucuk">Sekiz masal · Sekiz ayrı dünya</div>
+      <h1>Bir Masal, Bin Hayal</h1>
+      <p class="kapak-soz">Her masal başka bir dünyaya açılan kapıdır.</p>
+      <div class="yildiz-ayrac" aria-hidden="true"><svg viewBox="-22 -22 44 44"><g color="#8F3F29"><use href="#motif-yildiz-dolu"/></g></svg></div>
+      <p class="kapak-not">Bir zamanlar anlatılan, bugün de içimizi ısıtan sekiz masal… Bu küçük arşivde her hikâyenin kendine özgü bir rengi, motifi ve hayal kapısı var.</p>
+    </header>
+
+    <section class="arsiv dar-alan" aria-labelledby="arsiv-baslik">
+      <div class="arsiv-baslik"><h2 id="arsiv-baslik">Masal Sandığı</h2><span class="arsiv-sayi">01 — 08</span></div>
+      <div class="arama-kapsayici">
+        <label for="masal-arama">Masalların arasında ara</label>
+        <div class="arama-kutusu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.5 15.5 5 5"/></svg>
+          <input id="masal-arama" type="search" placeholder="Masalın adını yaz… (örneğin: nar)" autocomplete="off">
+        </div>
+      </div>
+      <nav id="kategori-dugmeleri" class="kategori-alani" aria-label="Masal temaları"></nav>
+      <p id="sonuc-sayisi" class="sonuc-bilgisi" role="status" aria-live="polite"></p>
+      <div id="masal-kartlari" class="kartlar"></div>
+      <div id="bos-sonuc" class="bos-sonuc" hidden><strong>Aradığın masal bulunamadı</strong>Başka bir ad veya kategori deneyebilirsin.</div>
+    </section>
+
+    <!-- Kaynakça, ana sayfanın en altındadır; JavaScript sekiz kaynağı listeye ekler. -->
+    <footer class="kaynakca" aria-labelledby="kaynakca-baslik">
+      <svg class="kilim-serit" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true"><rect width="1200" height="34" fill="url(#kilim-desen)"/></svg>
+      <div class="kaynak-icerik dar-alan">
+        <h2 id="kaynakca-baslik">Kaynakça</h2>
+        <ol id="kaynakca-listesi"></ol>
+        <p class="kaynak-not">Bu projedeki illüstrasyonlar, bu proje için özgün SVG çizimleri olarak hazırlanmıştır. Masalların okuma metinleri, bağlantısı verilen hikâyelerin olay örgüsünden hareketle bu proje için özgün biçimde yeniden anlatılmıştır; kaynak metinlerin birebir kopyası değildir.</p>
+        <p class="kaynak-ders arayuz">Programlamaya Giriş dersi projesi · Medipol Üniversitesi · Görsel İletişim Tasarımı</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========== 3. MASAL GÖRÜNÜMÜ: AYNI BELGEDE AÇILAN OKUMA ALANI ========== -->
+  <section id="masal-gorunumu" class="masal-gorunumu" aria-label="Masal okuma görünümü" data-desen="kalp" data-yerlesim="sol" data-cerceve="oval" hidden>
+    <div class="masal-bant" aria-hidden="true"></div>
+    <div class="okuma-sarmal">
+      <button type="button" class="geri-dugme" data-eve>← Ana Sayfaya Dön</button>
+      <div class="okuma-hero">
+        <div class="okuma-resim-kapsayici"><div class="resim-dis"><div id="buyuk-gorsel" class="resim-ic"></div></div></div>
+        <div class="okuma-baslik-alani">
+          <p id="masal-ust-etiket" class="okuma-ust-etiket"></p>
+          <h1 id="masal-baslik" tabindex="-1"></h1>
+          <div class="okuma-baslik-cizgisi" aria-hidden="true"></div>
+          <p id="masal-giris" class="okuma-giris"></p>
+        </div>
+      </div>
+      <article class="okuma-panel">
+        <h2 class="panel-baslik">Masalın Özeti</h2>
+        <p class="ozet-etiket">Bu özeti buradan düzenleyebilirsin; kalıcı değişiklik için script.js dosyasındaki ozet alanını değiştir.</p>
+        <p id="masal-ozet" class="okuma-ozet" contenteditable="true" role="textbox" aria-label="Masalın kısa özetini düzenle" spellcheck="true"></p>
+        <div class="metin-ust">
+          <h2 class="panel-baslik">Masalın Tam Metni</h2>
+          <div class="metin-kontroller" aria-label="Masal metninin yazı boyutu">
+            <button id="boyut-kucult" class="boyut-dugme" type="button" aria-label="Yazıyı küçült">A−</button>
+            <output id="boyut-goster" class="boyut-sayi" aria-live="polite">20px</output>
+            <button id="boyut-buyut" class="boyut-dugme" type="button" aria-label="Yazıyı büyüt">A+</button>
+          </div>
+        </div>
+        <p id="metin-turu" class="metin-turu" aria-label="Metnin türü"></p>
+        <div id="masal-metni" class="masal-metni"></div>
+        <div class="masal-kaynak">
+          <strong>Kaynak:</strong> <a id="masal-kaynak-link" href="#" target="_blank" rel="noopener noreferrer">Masal Oku — kaynak sayfasını aç</a>
+          <p id="masal-yazar-notu" class="yazar-notu" hidden></p>
+        </div>
+      </article>
+      <nav id="masal-gecisleri" class="masal-gecisleri" aria-label="Masallar arasında gezinme">
+        <div class="gecis-sira">
+          <button id="onceki-masal" type="button" class="gecis-dugme"><span class="gecis-yon">← Önceki masal</span><span id="onceki-ad" class="gecis-ad"></span></button>
+          <button id="sonraki-masal" type="button" class="gecis-dugme sonraki"><span class="gecis-yon">Sonraki masal →</span><span id="sonraki-ad" class="gecis-ad"></span></button>
+        </div>
+        <div id="mini-masallar" class="mini-listesi" aria-label="Sekiz masalın kısa yolu"></div>
+      </nav>
+      <button type="button" class="geri-dugme alt-geri" data-eve>← Ana Sayfaya Dön</button>
+    </div>
+    <div class="masal-bant" aria-hidden="true"></div>
+  </section>
+  <noscript><p style="padding:24px;font-size:18px">Masalları açmak ve arşivde arama yapmak için tarayıcında JavaScript açık olmalıdır.</p></noscript>
+
+  <!-- ========== 4. JAVASCRIPT: artık harici dosyada (script.js) ========== -->
+  <!-- Betik, sayfa elemanları oluştuktan sonra çalışsın diye </body>'den hemen önce bağlanır. -->
+  <script src="script.js"></script>
+</body>
+</html>
