@@ -12,7 +12,7 @@ Sekiz Türk masalını renkli ve özgün çizimlerle bir araya getiren dijital m
 | **Bölüm** | Görsel İletişim Tasarımı |
 | **Üniversite** | Medipol Üniversitesi |
 | **GitHub Repo** | https://github.com/yarenatila/-dev-teslim |
-| **Canlı Site** | [GITHUB PAGES LİNKİNİ BURAYA YAZ] |
+| **Canlı Site** | https://yarenatila.github.io/-dev-teslim/ |
 
 ## Proje Hakkında
 
